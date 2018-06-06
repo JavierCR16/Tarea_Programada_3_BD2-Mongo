@@ -7,10 +7,7 @@ import com.mongodb.MapReduceOutput;
 import com.mongodb.MongoClient;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -58,10 +55,18 @@ public class ControladorVentanaConsultas implements Initializable {
 
     public void initialize(URL fxmlLocations, ResourceBundle resources){
         botonTopicsPlaces.setOnAction(event -> {
-            resultadoConsultas.clear();
 
-            gestorMongo.setCollection(gestorMongo.getBdActual().getCollection(listaColecciones.getSelectionModel().getSelectedItem().toString()));// Por si no creo documentos y solo quiero consultar alguna coleccion
-            imprimirConsulta(gestorMongo.buscarTopicsPlaces(buscarTopics.getText(),buscarPlaces.getText(),projection.getText().split(",")));
+            if(buscarTopics.getText().equals("") || buscarPlaces.getText().equals("")||listaColecciones.getSelectionModel().getSelectedItem() == null)
+                mensajeAlerta("Los campos de topics y places no pueden estar vacios y se debe seleccionar una colección");
+            else {
+                resultadoConsultas.clear();
+                gestorMongo.setCollection(gestorMongo.getBdActual().getCollection(listaColecciones.getSelectionModel().getSelectedItem().toString()));
+                if(projection.getText().equals("")) {
+                    imprimirConsulta(gestorMongo.buscarTopicsPlaces(buscarTopics.getText(), buscarPlaces.getText(),null));
+                }
+                else
+                    imprimirConsulta(gestorMongo.buscarTopicsPlaces(buscarTopics.getText(), buscarPlaces.getText(), projection.getText().trim().split(",")));
+            }
         });
 
         botonBody.setOnAction(event -> {
@@ -98,8 +103,14 @@ public class ControladorVentanaConsultas implements Initializable {
         for (DBObject o : salida.results()) {
 
             resultadoMapReduce.appendText(o.toString()+"\n");
-
         }
 
+    }
+
+    public void mensajeAlerta(String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setTitle("Error");
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 }

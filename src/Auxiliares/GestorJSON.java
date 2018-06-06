@@ -35,7 +35,7 @@ public class GestorJSON {
 
     public void extraerTagsIndividuales(String tagABuscar,Element reuter,JSONObject objeto){
 
-        objeto.put(tagABuscar.toLowerCase(),reuter.getElementsByTagName(tagABuscar).item(0).getTextContent());
+        objeto.put(tagABuscar,reuter.getElementsByTagName(tagABuscar).item(0).getTextContent());
 
     }
 

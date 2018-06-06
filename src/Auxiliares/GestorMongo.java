@@ -27,6 +27,7 @@ public class GestorMongo {
     public GestorMongo(){
         establecerConexion();
     }
+
     public void insertarJSON(String directorioJSON) {
         try {
             File directorioJs = new File(directorioJSON);
@@ -45,6 +46,7 @@ public class GestorMongo {
         this.mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
         bdActual = mongoClient.getDB("TareaProgramada3BD2");
     }
+
     public MongoClient getMongoClient() {
         return mongoClient;
     }
@@ -72,16 +74,18 @@ public class GestorMongo {
     public DBCursor buscarTopicsPlaces(String topic, String place,String[] projection){
         BasicDBObject camposAUtilizar = new BasicDBObject();
 
-        for (String campoProjection : projection) {
-            String[] campoTemporal = campoProjection.split(":");
-            camposAUtilizar.put(campoTemporal[0],Integer.parseInt(campoTemporal[1]));
+        if(projection!=null) {
+            for (String campoProjection : projection) {
+                String[] campoTemporal = campoProjection.split(":");
+                camposAUtilizar.put(campoTemporal[0], Integer.parseInt(campoTemporal[1]));
+            }
         }
 
 
         BasicDBObject andQuery = new BasicDBObject();
         ArrayList<BasicDBObject> queriesSeparados = new ArrayList<>();
-        queriesSeparados.add(new BasicDBObject("topics", topic));
-        queriesSeparados.add(new BasicDBObject("places", place));
+        queriesSeparados.add(new BasicDBObject("TOPICS", topic));
+        queriesSeparados.add(new BasicDBObject("PLACES", place));
         andQuery.put("$and", queriesSeparados);
 
         DBCursor cursor = collection.find(andQuery,camposAUtilizar);
