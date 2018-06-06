@@ -6,28 +6,46 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ControladorVentanaPrincipal">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ControladorVentanaPrincipal">
    <children>
-      <Label layoutX="33.0" layoutY="78.0" text="Directorio">
+      <Label layoutX="33.0" layoutY="78.0" text="Directorio Reuters">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="directorioXML" editable="false" layoutX="102.0" layoutY="74.0" prefHeight="25.0" prefWidth="421.0" />
-      <Button fx:id="botonSeleccionar" layoutX="33.0" layoutY="119.0" mnemonicParsing="false" text="Seleccionar " />
-      <Label layoutX="33.0" layoutY="175.0" text="Nombre de la Colección">
+      <TextField fx:id="directorioXML" editable="false" layoutX="146.0" layoutY="74.0" prefHeight="25.0" prefWidth="421.0" />
+      <Button fx:id="botonSeleccionarEntrada" layoutX="33.0" layoutY="107.0" mnemonicParsing="false" text="Seleccionar ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Label layoutX="33.0" layoutY="237.0" text="Nombre de la Colección">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="nombreColeccion" layoutX="180.0" layoutY="171.0" prefHeight="25.0" prefWidth="202.0" />
-      <Button fx:id="botonConsultas" layoutX="382.0" layoutY="230.0" mnemonicParsing="false" text="Consultas" />
-      <Button fx:id="botonDocumentos" layoutX="123.0" layoutY="230.0" mnemonicParsing="false" text="Crear Documentos" />
-      <Label layoutX="179.0" layoutY="14.0" text="Carga de Reuters">
+      <TextField fx:id="nombreColeccion" layoutX="180.0" layoutY="233.0" prefHeight="25.0" prefWidth="202.0" />
+      <Button fx:id="botonConsultas" layoutX="433.0" layoutY="292.0" mnemonicParsing="false" text="Consultas">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="botonDocumentos" layoutX="136.0" layoutY="292.0" mnemonicParsing="false" text="Crear Documentos">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Label layoutX="227.0" layoutY="14.0" text="Carga de Reuters">
          <font>
             <Font name="Agency FB Bold" size="34.0" />
          </font>
       </Label>
+      <Label layoutX="33.0" layoutY="152.0" text="Directorio Salida JSON">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="pathSalida" editable="false" layoutX="172.0" layoutY="148.0" prefHeight="25.0" prefWidth="421.0" />
+      <Button fx:id="botonSeleccionarSalida" layoutX="33.0" layoutY="181.0" mnemonicParsing="false" text="Seleccionar ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </Pane>

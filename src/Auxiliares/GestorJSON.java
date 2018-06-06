@@ -48,19 +48,19 @@ public class GestorJSON {
 
             switch(textoTags.item(i).getNodeName()){
                 case "TITLE":
-                    objetoJS.put("title",textoTags.item(i).getTextContent());
+                    objetoJS.put("TITLE",textoTags.item(i).getTextContent());
                     break;
 
                 case "AUTHOR":
-                    objetoJS.put("author",textoTags.item(i).getTextContent());
+                    objetoJS.put("AUTHOR",textoTags.item(i).getTextContent());
                     break;
 
                 case "DATELINE":
-                    objetoJS.put("dateline",textoTags.item(i).getTextContent());
+                    objetoJS.put("DATELINE",textoTags.item(i).getTextContent());
                     break;
 
                 case "BODY":
-                    objetoJS.put("body",textoTags.item(i).getTextContent());
+                    objetoJS.put("BODY",textoTags.item(i).getTextContent());
                     break;
             }
         }
@@ -93,7 +93,7 @@ public class GestorJSON {
         return null;
     }
 
-    public void generarJSON(String directorioXMLS){
+    public void generarJSON(String directorioXMLS,String pathSalida){
 
         File dir = new File(directorioXMLS);
         File[] directoryListing = dir.listFiles();
@@ -105,7 +105,7 @@ public class GestorJSON {
             Document doc = retornarDoc(reuterXML);
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("REUTERS");
-            String nombreArreglos[] = {"topics", "places", "people", "orgs","exchanges"};
+            String nombreArreglos[] = {"TOPICS", "PLACES", "PEOPLE", "ORGS","EXCHANGES"};
 
             for (int i = 0; i <nList.getLength() ; i++) {//nList.getLength()
 
@@ -115,7 +115,7 @@ public class GestorJSON {
 
                 JSONObject objetoJson = new JSONObject();
 
-                objetoJson.put("NewID", elementoReuter.getAttribute("NEWID"));
+                objetoJson.put("NEWID", elementoReuter.getAttribute("NEWID"));
                 extraerTagsIndividuales("DATE", elementoReuter, objetoJson);
 
                 JSONArray topics = extraerTagsD("TOPICS", elementoReuter);
@@ -129,9 +129,9 @@ public class GestorJSON {
 
                 arreglosJson.clear();
 
-                objetoJson.put("text", extraerTagText(elementoReuter));
+                objetoJson.put("TEXT", extraerTagText(elementoReuter));
 
-                escribirJSON(objetoJson, contador);
+                escribirJSON(objetoJson, contador,pathSalida);
                 contador++;
 
             }
@@ -139,9 +139,9 @@ public class GestorJSON {
 
     }
 
-    public void escribirJSON(JSONObject objetoJson,int numero){
+    public void escribirJSON(JSONObject objetoJson,int numero,String pathSalida){
         try {
-            FileWriter file = new FileWriter("Archivos JSON\\reuterJSON"+numero+".json") ;
+            FileWriter file = new FileWriter(pathSalida+ "\\reuter" +numero+".json") ;
 
             file.write(objetoJson.toJSONString());
             file.flush();
