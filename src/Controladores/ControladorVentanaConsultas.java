@@ -70,8 +70,18 @@ public class ControladorVentanaConsultas implements Initializable {
         });
 
         botonBody.setOnAction(event -> {
-            resultadoConsultas.clear();
+            if(buscarBody.getText().equals("") || listaColecciones.getSelectionModel().getSelectedItem() == null)
+                mensajeAlerta("La búsqueda en BODY no puede ser vacía y se debe seleccionar al menos una colección");
+            else {
+                gestorMongo.setCollection(gestorMongo.getBdActual().getCollection(listaColecciones.getSelectionModel().getSelectedItem().toString()));
+                resultadoConsultas.clear();
 
+                if(projection.getText().equals("")) {
+                    imprimirConsulta(gestorMongo.buscarBody(buscarBody.getText(),null));
+                }
+                else
+                    imprimirConsulta(gestorMongo.buscarBody(buscarBody.getText(), projection.getText().trim().split(",")));
+            }
         });
 
         botonMapReduce.setOnAction(event -> {

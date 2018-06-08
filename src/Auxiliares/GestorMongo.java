@@ -93,6 +93,30 @@ public class GestorMongo {
         return cursor;
     }
 
+    public DBCursor buscarBody(String body,String[] projection) {
+        DBCursor documentosBody = null;
+        BasicDBObject camposAUtilizar = new BasicDBObject();
+        String frasesBuscar = "";
+        String bodySeparado[] = body.split(",");
+
+        if (projection != null) {
+            for (String campoProjection : projection) {
+                String[] campoTemporal = campoProjection.split(":");
+                camposAUtilizar.put(campoTemporal[0], Integer.parseInt(campoTemporal[1]));
+            }
+        }
+        for(String frase:bodySeparado){
+            frasesBuscar+=( "\"" + frase + "\" ");
+
+        }
+        DBObject busqueda = new BasicDBObject(
+                "$text", new BasicDBObject("$search",frasesBuscar)
+        );
+        documentosBody = collection.find(busqueda,camposAUtilizar);
+
+        return documentosBody;
+    }
+
     public void generarIndices(){
         String nombreArreglos[] = {"TOPICS", "PLACES", "PEOPLE", "ORGS","EXCHANGES"};
         for(int i=0;i<nombreArreglos.length;i++) {
@@ -120,6 +144,7 @@ public class GestorMongo {
                 null, MapReduceCommand.OutputType.INLINE,query);
        return collection.mapReduce(cmd);
     }
+
 
 
 
