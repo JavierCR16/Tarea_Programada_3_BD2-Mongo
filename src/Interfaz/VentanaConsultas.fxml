@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="725.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ControladorVentanaConsultas">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="725.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ControladorVentanaConsultas">
   <tabs>
     <Tab text="Consultas">
       <content>
@@ -67,13 +67,13 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea fx:id="resultadoMapReduce" editable="false" layoutX="11.0" layoutY="41.0" prefHeight="227.0" prefWidth="707.0" wrapText="true" />
-                  <Button fx:id="botonMapReduce" layoutX="147.0" layoutY="288.0" mnemonicParsing="false" text="Aplicar Map Reduce">
+                  <TextArea fx:id="resultadoMapReduce" editable="false" layoutX="9.0" layoutY="5.0" prefHeight="443.0" prefWidth="707.0" wrapText="true" />
+                  <Button fx:id="botonMapReduce" layoutX="147.0" layoutY="454.0" mnemonicParsing="false" text="Aplicar Map Reduce">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <ComboBox fx:id="listaColeccionesMap" layoutX="442.0" layoutY="288.0" prefWidth="150.0" />
+                  <ComboBox fx:id="listaColeccionesMap" layoutX="442.0" layoutY="454.0" prefWidth="150.0" />
                </children>
             </AnchorPane>
         </content>

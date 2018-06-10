@@ -118,12 +118,18 @@ public class GestorMongo {
     }
 
     public void generarIndices(){
+        //Indices ASC sobre campos que son arreglos
         String nombreArreglos[] = {"TOPICS", "PLACES", "PEOPLE", "ORGS","EXCHANGES"};
         for(int i=0;i<nombreArreglos.length;i++) {
-            collection.createIndex(new BasicDBObject(nombreArreglos[i],1),"Indice "+nombreArreglos[i]);
+            collection.createIndex(new BasicDBObject(nombreArreglos[i],1),"Indice " + nombreArreglos[i]);
 
         }
-        collection.createIndex(new BasicDBObject("TEXT.BODY","text"),"Indice Body");
+
+        //Indice de texto sobre TITLE Y BODY
+        BasicDBObject obj = new BasicDBObject();
+        obj.put("TEXT.TITLE", "text");
+        obj.put("TEXT.BODY", "text");
+        collection.createIndex(obj, "Indice TITLE BODY");
     }
 
     public MapReduceOutput aplicarMapReduce(){
